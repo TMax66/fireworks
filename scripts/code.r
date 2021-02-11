@@ -14,7 +14,8 @@ df <- readRDS(here("data", "processed",  "dati.rds"))
 
 d_MCA <- df %>% 
   select(6:12, 21, 25, 26) %>% 
-  na.omit()
+  na.omit()  
+ 
 
 #create_report(d_MCA)
 
@@ -28,3 +29,6 @@ fviz_screeplot(res.mca, addlabels = TRUE, ylim = c(0, 45))
 fviz_mca_biplot(res.mca, 
                 repel = TRUE, # Avoid text overlapping (slow if many point)
                 ggtheme = theme_minimal())
+
+##Low variance explained means that the items you have are not sufficient to explain your model. 
+##You should have additional items, since the once you have produce not enough variance just your dependent variable.
