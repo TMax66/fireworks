@@ -13,12 +13,22 @@ library("DataExplorer")
 df <- readRDS(here("data", "processed",  "dati.rds"))
 
 d_MCA <- df %>% 
-  select(6:12, 21, 25, 26) %>% 
+  filter(Country=="US") %>% 
+  select(6:17, 20, 21, 25, 26, 28:30,35, 36:44) %>% 
+  mutate(across(where(is.character), as.factor))
   na.omit()  
- 
+
+##non utilizzabili le colonne 18,19,22, 23, 24, 27, 28(?-verificare se usarla o meno), 33 (da usare come variabile di raggruppamento), 
+##45:50--------------------
 
 #create_report(d_MCA)
 
+summary(d_MCA)[, 1:31]
+
+for (i in 1:31) {
+  plot(d_MCA[,i], main=colnames(d_MCA)[i],
+       ylab = "Count", col="steelblue", las = 2)
+}
 
 res.mca = MCA(d_MCA, graph = FALSE)
 
