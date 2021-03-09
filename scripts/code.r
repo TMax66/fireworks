@@ -14,10 +14,13 @@ df <- readRDS(here("data", "processed",  "dati.rds"))
 plot_bar(df)### seleziono solo le variabili "discriminanti"...elimino quelle in cui c'è poca variabilità nelle risposte alle diverse categorie della variabile####
 
 d_MCA <- df %>% 
-  #filter(Country=="US") %>% 
+  #filter(Country=="UK") %>% 
   select(2, 6:9, 10:14,  16:17, 20, 25, 26, 28:30, 36:38, 40:41, 43:44) %>% 
   mutate(across(where(is.character), as.factor)) %>% 
-  na.omit()
+  na.omit() %>% 
+  select(-7, -21, -23)
+
+plot_bar(d_MCA[-1,])
 
 ##non utilizzabili le colonne 18,19,22, 23, 24, 27, 28(?-verificare se usarla o meno), 33 (da usare come variabile di raggruppamento), 
 ##45:50--------------------
